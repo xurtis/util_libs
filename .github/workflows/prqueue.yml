@@ -9,6 +9,11 @@ on:
   push:
     branches:
       - master
+      - pr-queue-test
+  pull_request:
+    branches:
+      - master
+      - pr-queue-test
   workflow_dispatch: {}
 
 jobs:
@@ -16,6 +21,6 @@ jobs:
     name: Notify PR candidate
     runs-on: ubuntu-latest
     steps:
-    - uses: seL4/ci-actions/pr-queue@master
+    - uses: seL4/ci-actions/pr-queue@pr-queue
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
