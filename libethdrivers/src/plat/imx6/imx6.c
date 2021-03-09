@@ -21,7 +21,8 @@
 #include "uboot/micrel.h"
 #include "unimplemented.h"
 
-#define DEFAULT_MAC "\x00\x19\xb8\x00\xf0\xa3"
+// Temporary fix: set to imx8mq mac
+#define DEFAULT_MAC "\x00\x04\x9f\x05\x93\xdf"
 
 #define BUF_SIZE MAX_PKT_SIZE
 #define DMA_ALIGN 32
@@ -404,6 +405,7 @@ int ethif_imx6_init(struct eth_driver *eth_driver, ps_io_ops_t io_ops, void *con
     }
 
     /* initialise the eFuse controller so we can get a MAC address */
+    // TODO: This assumes IMX6 OCOTP, but this could be IMX8
     ocotp = ocotp_init(&io_ops.io_mapper);
     if (!ocotp) {
         LOG_ERROR("Failed to initialize ocotp");
